@@ -19,4 +19,12 @@ public class Task extends PanacheEntity {
     public Task(Instant time) {
         this.createdAt = time;
     }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
 }
