@@ -38,8 +38,9 @@ public class TaskBean {
                         .startAt(startDate)
                         .withSchedule(
                                 SimpleScheduleBuilder.simpleSchedule()
-                                        .withIntervalInSeconds(10)
-                                        .repeatForever())
+                                        //.withIntervalInSeconds(10)
+                                        //.repeatForever())
+                                        .withMisfireHandlingInstructionFireNow())  // Ensures immediate firing on misfire
                         .build();
 
                 quartz.scheduleJob(job, trigger);
