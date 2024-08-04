@@ -15,8 +15,6 @@ public class EmailSchedulerService {
     @Inject
     Scheduler quartz;
 
-    @Inject
-    Mailer mailer;
 
     public void scheduleEmail(Email email) throws SchedulerException {
         JobDataMap jobDataMap = new JobDataMap();

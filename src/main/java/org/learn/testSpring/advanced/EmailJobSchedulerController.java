@@ -12,12 +12,14 @@ import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
 
-@Path("/scheduleEmail")
+@Path("/api/v2/scheduleEmail")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class EmailJobSchedulerController {
@@ -26,14 +28,13 @@ public class EmailJobSchedulerController {
     @Inject
     Scheduler scheduler;
 
-    @Inject
-    EmailJob emailJob;
     @POST
     @Path("/scheduleEmail")
     public Response scheduleEmail(@Valid ScheduleEmailRequest scheduleEmailRequest) {
         try {
-            ZonedDateTime dateTime = ZonedDateTime.of(scheduleEmailRequest.getDateTime(), scheduleEmailRequest.getTimeZone());
-            if(dateTime.isBefore(ZonedDateTime.now())) {
+            ZonedDateTime dateTime = convertToZonedDateTime(scheduleEmailRequest);
+
+            if (dateTime.isBefore(ZonedDateTime.now())) {
                 ScheduleEmailResponse scheduleEmailResponse = new ScheduleEmailResponse(false,
                         "dateTime must be after current time");
                 return Response.status(Response.Status.BAD_REQUEST).entity(scheduleEmailResponse).build();
@@ -45,6 +46,8 @@ public class EmailJobSchedulerController {
 
             ScheduleEmailResponse scheduleEmailResponse = new ScheduleEmailResponse(true,
                     jobDetail.getKey().getName(), jobDetail.getKey().getGroup(), "Email Scheduled Successfully!");
+            logger.info("email  scheduled sucessfully", scheduleEmailResponse);
+
             return Response.ok(scheduleEmailResponse).build();
         } catch (SchedulerException ex) {
             logger.error("Error scheduling email", ex);
@@ -78,5 +81,11 @@ public class EmailJobSchedulerController {
                 .startAt(Date.from(startAt.toInstant()))
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule().withMisfireHandlingInstructionFireNow())
                 .build();
+    }
+
+    public ZonedDateTime convertToZonedDateTime(ScheduleEmailRequest request) {
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+        return ZonedDateTime.parse(request.getDateTime(), formatter)
+                .withZoneSameInstant(ZoneId.of(request.getTimeZone()));
     }
 }

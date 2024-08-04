@@ -4,9 +4,6 @@ import io.smallrye.common.constraint.NotNull;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
 public class ScheduleEmailRequest {
     @Email
     @NotEmpty
@@ -19,10 +16,10 @@ public class ScheduleEmailRequest {
     private String body;
 
     @NotNull
-    private LocalDateTime dateTime;
+    private String dateTime;
 
     @NotNull
-    private ZoneId timeZone;
+    private String timeZone;
 
     public String getEmail() {
         return email;
@@ -48,19 +45,19 @@ public class ScheduleEmailRequest {
         this.body = body;
     }
 
-    public LocalDateTime getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
-    public ZoneId getTimeZone() {
+    public String getTimeZone() {
         return timeZone;
     }
 
-    public void setTimeZone(ZoneId timeZone) {
+    public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
     }
 }
