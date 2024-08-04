@@ -13,7 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
-import org.quartz.SchedulerException;
+import org.quartz.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,6 +64,7 @@ public class TaskResource {
                     .build();
         }
     }
+
     @GET
     public List<Task> listAll() {
         return Task.listAll();
