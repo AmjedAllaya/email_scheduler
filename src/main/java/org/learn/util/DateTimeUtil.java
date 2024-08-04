@@ -1,4 +1,4 @@
-package org.learn;
+package org.learn.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

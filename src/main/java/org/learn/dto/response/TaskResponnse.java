@@ -1,10 +1,10 @@
-package org.learn;
+package org.learn.dto.response;
 
 
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class TaskResult {
+public class TaskResponnse {
     private String result;
 
     public synchronized String getResult() {

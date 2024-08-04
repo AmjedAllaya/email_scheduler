@@ -1,12 +1,12 @@
-package org.learn;
+package org.learn.service;
 
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.learn.entity.Task;
 import org.quartz.*;
 
-import java.time.ZonedDateTime;
 import java.util.Date;
 
 @ApplicationScoped

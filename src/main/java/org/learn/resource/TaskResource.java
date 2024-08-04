@@ -1,4 +1,4 @@
-package org.learn;
+package org.learn.resource;
 
 
 import jakarta.inject.Inject;
@@ -13,6 +13,9 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.learn.dto.request.ScheduleRequest;
+import org.learn.entity.Task;
+import org.learn.service.TaskBean;
 import org.quartz.*;
 
 import java.text.ParseException;

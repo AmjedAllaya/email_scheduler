@@ -1,4 +1,4 @@
-package org.learn;
+package org.learn.dto.request;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
